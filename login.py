@@ -52,4 +52,27 @@ driver.find_element(By.CLASS_NAME, 'submitbtn').click()
 time.sleep(5)
 print (driver.title)
 
+ticket2 = main.doLogin(os.environ['USERNAME_Z'],os.environ['PASSWORD_Z'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+driver2 = webdriver.Chrome(options=options)
+# driver = webdriver.Chrome()
+try:
+    driver2.get(ticket2)
+except Exception:
+    print ("gg")
+
+
+time.sleep(1)
+driver2.find_element(By.CLASS_NAME, 'am-button').click()
+#driver.find_element_by_class_name("am-button").click()
+
+time.sleep(1)
+driver2.find_element(By.CLASS_NAME, 'textArea').send_keys("吃饭")
+#driver.find_element_by_class_name("textArea").send_keys("吃饭")
+
+time.sleep(1)
+driver2.find_element(By.CLASS_NAME, 'submitbtn').click()
+#driver.find_element_by_class_name("submitbtn").click()
+
+time.sleep(5)
+print (driver2.title)
 
