@@ -52,6 +52,13 @@ driver.find_element(By.CLASS_NAME, 'submitbtn').click()
 time.sleep(5)
 print (driver.title)
 
+from PIL import Image
+import pytesseract
+import os
+import time
+from libhustpass import main
+import sys
+
 ticket2 = main.doLogin(os.environ['USERNAMEZ'],os.environ['PASSWORDZ'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
 
 driver2 = webdriver.Chrome(options=options)
@@ -61,6 +68,9 @@ try:
 except Exception:
     print ("gg")
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 
 time.sleep(1)
 driver2.find_element(By.CLASS_NAME, 'am-button').click()
