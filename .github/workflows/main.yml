@@ -77,5 +77,4 @@ jobs:
           echo $USERNAME
           echo $PASSWORD
           echo $GITHUB_TOKEN
-          python login2.py
           python login.py
