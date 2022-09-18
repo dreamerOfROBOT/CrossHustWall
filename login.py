@@ -52,8 +52,8 @@ driver.find_element(By.CLASS_NAME, 'submitbtn').click()
 time.sleep(5)
 print (driver.title)
 
-#ticket2 = main.doLogin(os.environ['USERNAMEZ'],os.environ['PASSWORDZ'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
-ticket2 = main.doLogin('U201911038','zxy,1904121',"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+ticket2 = main.doLogin(os.environ['USERNAMEZ'],os.environ['PASSWORDZ'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+
 driver2 = webdriver.Chrome(options=options)
 # driver = webdriver.Chrome()
 try:
