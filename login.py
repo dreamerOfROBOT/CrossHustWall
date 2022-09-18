@@ -6,7 +6,7 @@ from libhustpass import main
 import sys
 
 #ticket = main.doLogin(os.environ['USERNAME'],os.environ['PASSWORD'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
-ticket = main.doLogin('D202281128','31000060',"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+ticket = main.doLogin('D202281128','753,.?qaz',"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
 #print(os.environ['USERNAME'],os.environ['PASSWORD'])
 #print(ticket)
 
@@ -38,7 +38,7 @@ except Exception:
 
 
 time.sleep(1)
-driver.find_element(By.CLASS_NAME, 'am-button am-button-primary').click()
+driver.find_element(By.CLASS_NAME, 'am-button').click()
 #driver.find_element_by_class_name("am-button").click()
 
 time.sleep(1)
