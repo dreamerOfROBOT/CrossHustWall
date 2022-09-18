@@ -2,16 +2,12 @@
 
 name: CI2
 
-# Controls when the workflow will run
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  push: 
+  schedule: 
+      - cron: '55 10,22 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -23,14 +19,62 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install tesseract-ocr  
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          sudo apt-get install tesseract-ocr  
+      #- name: Install Chrome
+      #  run: |
+      #    sudo echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+      #    sudo apt-get -y update
+      #    sudo apt-get -y install google-chrome-stable
+      #    version=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+      #    wget -qP "/tmp/" "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
+      #    sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
+      #    chromedriver --version
+
+      - name: install chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
+          sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add
+          sudo su -c "echo 'deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google-chrome.list"
+          sudo apt-get -y update
+          sudo apt-get -y install google-chrome-stable
+          
+          version=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
+          sudo unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/bin/chromedriver
+          sudo chown root:root /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
+          google-chrome --version
+          chromedriver --version
+          
+          
+      # Runs a single command using the runners shell
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Install dep
+        run: |
+          pip install pytesseract
+          pip install Pillow
+          pip install selenium
+          pip install requests
+      - name: Start Login
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          USERNAMEZ: ${{ secrets.USERNAMEZ }}
+          PASSWORDZ: ${{ secrets.PASSWORDZ }}
+        run: |
+          echo $USERNAME
+          echo $PASSWORD
+          echo $GITHUB_TOKEN
+          python login2.py
+          python login.py
