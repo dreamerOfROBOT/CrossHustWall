@@ -5,7 +5,7 @@ import time
 from libhustpass import main
 import sys
 
-ticket = main.doLogin(os.environ['USERNAME'],os.environ['PASSWORD'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+ticket = main.doLogin(os.environ['USER'],os.environ['PASS'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
 
 print(os.environ['USERNAME'],os.environ['PASSWORD'])
 #print(ticket)
@@ -59,7 +59,7 @@ import time
 from libhustpass import main
 import sys
 
-ticket2 = main.doLogin(os.environ['USERNAMEZ'],os.environ['PASSWORDZ'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+ticket2 = main.doLogin(os.environ['USERNAME'],os.environ['PASSWORD'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
 
 driver2 = webdriver.Chrome(options=options)
 # driver = webdriver.Chrome()
