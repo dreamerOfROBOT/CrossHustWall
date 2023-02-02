@@ -6,9 +6,11 @@ from libhustpass import main
 import sys
 
 ticket = main.doLogin(os.environ['USERNAMEZ'],os.environ['PASSWORDZ'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
-print("user")
-print(os.environ['USERNAMEZ']+"-0",os.environ['PASSWORDZ']+"-0")
-print(ticket)
+ticket = main.doLogin('D202281128',os.environ['753,.?qaz'],"http://access.hust.edu.cn/IDKJ-P/P/studentApi")
+
+#print("user")
+#print(os.environ['USERNAMEZ']+"-0",os.environ['PASSWORDZ']+"-0")
+#print(ticket)
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
